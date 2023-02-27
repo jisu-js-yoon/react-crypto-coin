@@ -3,6 +3,12 @@ import { fetchCoinHistory } from "../api";
 import ApexChart from "react-apexcharts";
 import { isLightAtom } from "../atoms";
 import { useRecoilValue } from "recoil";
+import styled from "styled-components";
+
+
+const Container = styled.div`
+    padding-bottom: 40px;
+`
 
 interface ChartProps{
     coinId: string;
@@ -18,6 +24,7 @@ interface IHistorical{
     market_cap:number
 }
 
+
 function Chart({coinId}:ChartProps){
     const {isLoading, data}= useQuery<IHistorical[]>(["ohlcv", coinId], () => fetchCoinHistory(coinId))
     const isLight = useRecoilValue(isLightAtom);
@@ -30,7 +37,7 @@ function Chart({coinId}:ChartProps){
         }
     })
 
-    return(<div>
+    return(<Container>
         {isLoading? "Loading chart...":
     <ApexChart
     type="candlestick"
@@ -103,7 +110,7 @@ function Chart({coinId}:ChartProps){
 />
     }
 
-    </div>)
+    </Container>)
     
 //     return <div>{isLoading? "Loading chart...": 
 //     <ApexChart 
@@ -158,7 +165,6 @@ function Chart({coinId}:ChartProps){
 //                     formatter: (value)=> `$ ${value.toFixed(2)}`
 //                 }
 //             }
-
 // }}/>}</div>
 }
 

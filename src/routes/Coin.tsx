@@ -175,7 +175,7 @@ function Coin() {
     // },[coinId]);
 
     const loading = infoLoading||tickersLoading;
-
+    /* console.log(tickersData); */
     return (
         <Container>
             <HelmetProvider>
@@ -226,7 +226,7 @@ function Coin() {
                 
                 <Switch>
                         <Route path={`/:coinId/price`}>
-                            <Price />
+                            <Price coinId={coinId}/>
                         </Route>
                         <Route path={`/:coinId/chart`}>
                             <Chart coinId={coinId}/>
